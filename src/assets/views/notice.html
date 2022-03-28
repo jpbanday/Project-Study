@@ -1,0 +1,142 @@
+<div class="col-sm-12 top-page" style="height: 68vw;">
+	<img src="src/assets/img/Work Status/Work status-bg.jpg" class="col-sm-12 p-0">
+	<div class="col-sm-12" style="position: absolute; padding: 1.5vw 0 0;">
+		<div class="col-sm-2 p-0"></div>
+		<div class="col-sm-8 p-0">
+			<div class="col-sm-12 p-0">
+				<span class="col-sm-12 semi-bold pl-0 font-s22" style="color: #A19C8B;">WHAT'S NEW?</span>
+				<span class="col-sm-12 semi-bold pl-0 font-s40 semi-bold" style="color: #F1E7D2;">NOTICE PAGE</span>
+			</div>
+			<div class="col-sm-12 p-0" style="transform: translateY(2.5vw); margin-bottom: 4vw;">
+				<!-- TAB -->
+				<div class="col-sm-6 p-0 d-flex" ng-init="tabList = 'all-nav'" style="margin-top: 20px;">
+					<ul class="d-flex" style="padding: 0 0 0 0; list-style-type: none;">
+						<li class="text-center font-s16 pointer"  style="padding: 0 1vw; color: #CEBE91;"
+							ng-class="{'tab-list-active': tabList == 'all-nav'}" ng-click="changeData('all-nav')">ALL</li>
+						<li class="text-center font-s16 pointer"  style="padding: 0 1vw; color: #CEBE91;"
+							ng-class="{'tab-list-active': tabList == 'events-nav'}" ng-click="changeData('events-nav')">EVENTS</li>
+						<li class="text-center font-s16 pointer"  style="padding: 0 1vw; color: #CEBE91;"
+							ng-class="{'tab-list-active': tabList == 'notice-nav'}" ng-click="changeData('notice-nav')">NOTICE</li>
+						<li class="text-center font-s16 pointer" style="padding: 0 1vw; color: #CEBE91;"
+							ng-class="{'tab-list-active': tabList == 'news-nav'}" ng-click="changeData('news-nav')">NEWS</li>
+					</ul>
+				</div>
+				<!-- FILTER class="header-search color-neutral"-->
+				<div class="col-sm-6 p-0">
+					<div style="text-align: right;">
+						<input style="padding: 10px 0px 10px 22px; background: #000407 0% 0% no-repeat padding-box;
+						border: 2px solid #785A28; min-width: 317px; color: #928D80;" type="text" placeholder="Search">
+						<span class="input-search-span">
+							<img src="src/assets/img/Notice Page/ic-search.png">
+						</span>
+						<span class="sort-btn" ng-click="showData()">
+							<img src="src/assets/img/Notice Page/Ic-list.png" style="height: 15px; width: 20px;" ng-show="!showTable">
+							<img src="src/assets/img/Notice Page/Ic-grid.png" style="height: 15px; width: 20px;" ng-show="showTable">
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 p-0">
+				<div class="row" ng-show="!showTable">
+					<div class="" ng-repeat="i in data | limitTo : maxView : (pageNumber-1)*maxView track by $index">
+						<div class="notice-container">
+							<div class="col-sm p-0">
+								<div class="col-sm-12 p-0" style="color: #A19C8B;">
+									<span class="col-sm-3 p-0 font-s20 semi-bold">{{ i.ctr }}</span>
+									<div class="col-sm-9 p-0" style="text-align: right;">
+										<span class="font-s12 col-sm-12 p-0 semi-bold"> {{ i.position }} </span>
+										<span class="font-s12 col-sm-12 p-0 semi-bold"> {{ i.postedDate | date: 'yyyy.MM.dd' }} </span>
+									</div>
+								</div>
+								<div class="col-sm-12" style="padding: 10px 0 20px 0;">
+									<span class="semi-bold font-s15" style="color: #F1E7D2;"> {{ i.desc }} </span>
+								</div>
+								<div class="col-sm-12 p-0" style="color: #A19C8B;">
+									<div class="col-sm-6" style="padding: 0 5px 0 0;">
+										<span class="font-s12 col-sm-8 p-0 semi-bold" style="color: #A19C8B;">Suggestion: </span>
+										<span class="font-s12 col-sm-4 p-0 semi-bold text-right" style="color: #C89B3C;"> {{ i.totalSuggestion | number }} </span>
+									</div>
+									<div class="col-sm-6" style="padding: 0 0 5px 0;">
+										<span class="font-s12 col-sm-8 p-0 semi-bold" style="color: #A19C8B;">Lookup: </span>
+										<span class="font-s12 col-sm-4 p-0 semi-bold text-right" style="color: #C89B3C;"> {{ i.totalLookup | number }} </span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<table class="col-sm-12 p-0 data-hover" ng-show="showTable">
+					<tr>
+						<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+							Number
+						</th>
+						<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+							Title
+						</th>
+						<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+							Writer
+						</th>
+						<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+							Date Created
+						</th>
+						<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+							Suggestion
+						</th>
+						<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+							Lookup
+						</th>
+					</tr>
+				
+					<tr class="notice-container" ng-repeat="i in data | limitTo : maxView : (pageNumber-1)*maxView track by $index"
+					style="margin: 0 0 10px 0; height: auto; width: 0; padding: 0; border: 2px solid #302F35;">
+						<td class="font-s18" style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+							{{ i.ctr | number }}
+						</td>
+						<td style="color: #F1E7D2; margin: 0 0 10px 0; padding: 5px 10px">
+							{{ i.desc }}
+						</td>
+						<td style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+							{{ i.position }}
+						</td>
+						<td style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+							{{ i.datePosted | date: "yyyy.MM.dd" }}
+						</td>
+						<td style="color: #C89B3C; margin: 0 0 10px 0; padding: 5px 10px">
+							{{ i.totalSuggestion | number }}
+						</td>
+						<td style="color: #C89B3C; margin: 0 0 10px 0; padding: 5px 10px">
+							{{ i.totalLookup | number }}
+						</td>
+					</tr>
+				</table>
+				<div class="col-sm-12 p-0">
+					<ul class="pagination col-sm-12"
+						style="display: flex; justify-content: flex-end; align-items: center;">
+						<li ng-click="prevPage()" ng-show="pageNumber > 5">
+							<a class="prev">
+								<i class="fa fa-chevron-left font-w400" aria-hidden="true"></i>
+							</a>
+						</li>
+						<li ng-repeat="page in pages | limitTo: 4 : pagePosition()" ng-click="setPage(page)">
+							<div>
+								<span ng-class="(pageNumber == page) ? 'pagenum-span' : 'unselected-page-num'"
+								style="cursor:pointer!important;">{{ page }}</span>
+							</div>
+						
+						</li>
+						<li ng-click="nextPage()" ng-show="pages.length > 5">
+							<a class="next">
+								<i class="fa fa-chevron-right font-w400" aria-hidden="true"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2 p-0"></div>
+	</div>
+	<div class="col-sm-2 p-0"></div>
+	<div class="col-sm-8 p-0">
+	</div>
+	<div class="col-sm-2 p-0"></div>
+</div>

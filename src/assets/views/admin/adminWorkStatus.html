@@ -1,0 +1,119 @@
+<div class="admin-bg">
+	<div class="admin-header d-flex align-items-center justify-content-space-between">
+		<div>
+			<span class="font-s24 semi-bold pointer" style="color: #C99D40;" ng-click="returnToList()">WORK STATUS </span>
+			<span class="font-s24 semi-bold" style="color: #C99D40;"> {{ textDisplayToHeader }} </span>
+		</div>
+		
+		<div class="d-flex align-items-center">
+			<input  ng-show="dataView == 'list'" style="padding: 10px 0px 10px 25px; background: #F0E6D2 0% 0% no-repeat padding-box;
+			border: 2px solid #C99D40; min-width: 317px; color: #B5AA84;" type="text" placeholder="Search">
+			<span  ng-show="dataView == 'list'" class="input-search-span" style="padding-left: 5px;">
+				<i class="fa fa-search" style="color: #C99D40; padding-left: 5px; padding-top: 6px;"></i>
+			</span>
+			<button class="btn" ng-show="dataView == 'list'" style="margin-left: 15px; height: 45px; padding: 10px 35px; background-color: #C99D40; color: white;"
+			ng-click="createNew()">
+				CREATE WORK STATUS
+			</button>
+			<button class="btn" ng-show="dataView == 'create'" ng-click="saveWorkStatus('Draft')"
+			style="margin-left: 15px; height: 45px; padding: 10px 35px; background-color: #EBDEC4; color: #B5AA84; border: 0;">
+				SAVE AS DRAFT
+			</button>
+			<button class="btn" ng-show="dataView == 'create'" ng-click="saveWorkStatus('Posted')"
+			style="margin-left: 15px; height: 45px; padding: 10px 35px; background-color: white; color: #C99D40;" >
+				SAVE WORK STATUS
+			</button>
+			<button class="btn" ng-click="returnToList()" ng-show="dataView == 'success'" style="margin-left: 15px; height: 45px; padding: 10px 35px; background-color: #C99D40; color: white;">
+				RETURN TO LIST
+			</button>
+		</div>
+	</div>
+	<div class="col-sm-12" style="padding: 30px 40px;">
+		<!-- TABLE -->
+		<table class="col-sm-12 p-0" ng-show="dataView == 'list'">
+			<tr class="admin-table-header">
+				<th>Number</th>
+				<th>Title</th>
+				<th>Writer	</th>
+				<th>Status</th>
+				<th>Date Created</th>
+				<th></th>
+			</tr>
+			<tr class="admin-table-data" ng-show="data.length > 0"
+				ng-repeat="i in data | limitTo : maxView : (pageNumber-1)*maxView track by $index">
+				<td ng-click="viewDetails($index)">{{ i.ctr }}</td>
+				<td ng-click="viewDetails($index)">{{ i.title }}</td>
+				<td ng-click="viewDetails($index)">{{ i.writer }}</td>
+				<td ng-click="viewDetails($index)">
+					<span ng-if="i[1].status == 'Posted'" style="color: #2CB230;">{{ i.status }}</span>
+					<span ng-if="i[1].status == 'Draft'" style="color: #D54343;">{{ i.status }}</span>
+				</td>
+				<td ng-click="viewDetails($index)">{{ i.datePosted | date: 'yyyy.MM.dd' }}</td>
+				<td>
+					<img src="src/assets/img/Admin Page/Ic_Edit.png" class="pointer" ng-click="editDetails($index)" style="height: 28px;">
+					<img src="src/assets/img/Admin Page/Ic_Delete.png" class="pointer" ng-click="removeData($index)" style="height: 28px;">
+				</td>
+			</tr>
+			<tr class="admin-table-data" ng-show="data.length == 0"
+			style="margin: 0 0 10px 0; height: auto; width: 0; padding: 0;">
+				<td class="font-s14 text-center" colspan="6" style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+					No data to display.
+				</td>
+			</tr>
+		</table>
+
+		<div class="col-sm-12 p-0" ng-show="data.length > 0 && dataView == 'list'">
+			<ul class="pagination col-sm-12 p-0 d-flex justify-content-center align-items-center">
+				<li ng-click="prevPage()" ng-show="pageNumber > 5">
+					<a class="prev">
+						<i class="fa fa-chevron-left font-w400" aria-hidden="true"></i>
+					</a>
+				</li>
+				<li ng-repeat="page in pages | limitTo: 4 : pagePosition()" ng-click="setPage(page)">
+					<div>
+						<span ng-class="(pageNumber == page) ? 'admin-pagenum-span' : 'admin-unselected-page-num'"
+						style="cursor:pointer!important;">{{ page }}</span>
+					</div>
+				
+				</li>
+				<li ng-click="nextPage()" ng-show="pages.length > 5">
+					<a class="next">
+						<i class="fa fa-chevron-right font-w400" aria-hidden="true"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- CREATE -->
+		<form name="admWorkStatusFrm">
+			<div ng-show="dataView == 'create'" class="create d-flex flex-direction-column">
+				<span class="font-s14 pb-30" style="color: #755F36;">Work Status No. <span style="color: #C99D40;">322</span></span>
+				<span class="font-s14 pb-10" style="color: #755F36;">Title</span>
+				<input type="text" class="admin-input" style="margin-bottom: 20px;" ng-model="details.title" required>
+				<span class="font-s14 pb-10" style="color: #755F36;">Writer</span>
+				<input type="text" class="admin-input" style="margin-bottom: 20px;" ng-model="details.writer" required>
+				<span class="font-s14 pb-10" style="color: #755F36;">Description</span>
+				<textarea rows="10" class="admin-input" ng-model="details.desc" required></textarea>
+			</div>
+		</form>
+
+		<!-- SUCESS -->
+		<div ng-show="dataView == 'success'" class="admin-success d-flex flex-direction-column">
+			<span class="font-s14" style="color: #2CB230;">Work Status No. <span style="color: #2CB230;">{{ data.length+1 | number }}</span></span>
+			<span class="font-s18 semi-bold" style="color: #2CB230;">"{{ successTitle }}" has been posted successfully!</span>
+		</div>
+
+		<!-- DETAIL VIEW -->
+		<div ng-show="dataView == 'details'" class="create d-flex justify-content-space-between align-items-center" style="padding: 10px 20px; margin-bottom: 10px;">
+			<span class="font-s22 semi-bold" style="color: #C99D40;">
+				{{ selectedDetails.ctr | number }} 
+				<span class="font-s16 semi-bold" style="color: #755F36;">
+					{{ selectedDetails.title }}
+				</span> 
+			</span>
+			<span class="font-s14" style="color: #B5AA84;"> {{ selectedDetails.writer }} | {{ selectedDetails.datePosted | date: 'yyyy.MM.dd' }} </span>
+		</div>
+		<textarea ng-show="dataView == 'details'" class="admin-input font-s14 col-sm-12" rows="10" disabled> {{ selectedDetails.desc }} </textarea>
+
+	</div>
+</div>

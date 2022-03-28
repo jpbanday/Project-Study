@@ -1,0 +1,108 @@
+<div class="col-sm-12 top-page" style="height: 63vw;">
+	<div style="background-image: url('src/assets/img/Work Status/Work status-bg.jpg'); height: inherit; background-repeat: no-repeat;">
+		<div class="col-sm-2 p-0"></div>
+		<div class="col-sm-8 p-0">
+			<div class="col-sm-12" style="padding: 2vw 0 0;">
+				<span class="col-sm-12 semi-bold pl-0 font-s22" style="color: #A19C8B;">WE WILL INFORM YOU OF EVERY STATUS OF OUR WORK!</span>
+				<span class="col-sm-12 semi-bold pl-0 font-s40 semi-bold" style="color: #F1E7D2;">WORK STATUS</span>
+			</div>
+			<div class="col-sm-12 p-0" style="transform: translateY(5vw);">
+				<div ng-show="!isShowData">
+					<div class="d-flex justify-content-space-between align-items-center pb-10">
+						<span class="font-s16" style="color: #F4EAD5;">All 321</span>
+						<div class="">
+							<select id="sort">
+								<option value="lastestOrder">Latest Order</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-12 p-15-0">
+						<table class="col-sm-12 p-0 data-hover">
+							<tr>
+								<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+									Number
+								</th>
+								<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+									Title
+								</th>
+								<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+									Writer
+								</th>
+								<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+									Date Created
+								</th>
+							</tr>
+							<tr class="notice-container" ng-repeat="i in data | limitTo : maxView : (pageNumber-1)*maxView track by $index" 
+							style="margin: 0 0 10px 0; height: auto; width: 0; padding: 0; border: 2px solid #302F35;" ng-click="viewData(i.ctr, $index)">
+								<td class="font-s18" style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+									{{ i.ctr | number }}
+								</td>
+								<td style="color: #F1E7D2; margin: 0 0 10px 0; padding: 5px 10px">
+									{{ i.title }}
+								</td>
+								<td style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+									{{ i.writer }}
+								</td>
+								<td style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+									{{ i.datePosted | date: "yyyy.MM.dd" }}
+								</td>
+							</tr>
+						</table>
+						<div class="col-sm-12 p-0">
+							<ul class="pagination col-sm-12 p-0 d-flex justify-content-flex-end align-items-center">
+								<li ng-click="prevPage()" ng-show="pageNumber > 5">
+									<a class="prev">
+										<i class="fa fa-chevron-left font-w400" aria-hidden="true"></i>
+									</a>
+								</li>
+								<li ng-repeat="page in pages | limitTo: 4 : pagePosition()" ng-click="setPage(page)">
+									<div>
+										<span ng-class="(pageNumber == page) ? 'pagenum-span' : 'unselected-page-num'"
+										style="cursor:pointer!important;">{{ page }}</span>
+									</div>
+								
+								</li>
+								<li ng-click="nextPage()" ng-show="pages.length > 5">
+									<a class="next">
+										<i class="fa fa-chevron-right font-w400" aria-hidden="true"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div ng-show="isShowData" class="col-sm-12 p-0">
+					<span class="pb-30 semi-bold pointer" style="color: #F4EAD5;" ng-click="backToList()"> &lt;&lt; Back to List View</span>
+
+					<div class="col-sm-12" style="padding: 30px 0 0;">
+						<div class="col-sm-12" style="background: #010A13 0% 0% no-repeat padding-box; border: 2px solid #463714; margin: 0 20px; width: 63.3vw;">
+							<div style="height: 552.15px;"></div>
+						</div>
+						<div class="col-sm-12 p-15" style="background: #010A13 0% 0% no-repeat padding-box; border: 2px solid #463714; transform: translateY(-35vw);">
+							<div class="col-sm-12 p-0 d-flex flex-direction-column">
+								<span class="font-s16 semi-bold" style="color: #B5AA84;"> {{ selectedData.ctr }} </span>
+								<span class="font-s18 semi-bold" style="color: #C8AA6E;"> {{ selectedData.desc }} </span>
+								<span class="font-s16" style="color: #B5AA84;"> 
+									{{ selectedData.position }} | {{ selectedData.datePosted | date: "yyyy.MM.dd" }}
+								</span>
+							</div>
+							<div class="col-sm-12" style="border-top: 2px solid #463714; margin: 20px 0;"></div>
+							<div style="min-height: 462px;">
+								<span class="font-s16 semi-bold" style="color: #D1C6A8; "> {{ selectedData.desc }} </span>
+							</div>
+							<div class="col-sm-12 p-0 d-flex justify-content-space-between">
+								<span class="font-s16 semi-bold pointer" style="color: #C99D40;" ng-click="nextShowData('prev')"> 
+									 {{ prevData.desc != null ? '&lt;&lt; ' + prevData.desc : '' }}
+								</span>
+								<span class="font-s16 semi-bold pointer" style="color: #C99D40;" ng-click="nextShowData('next')"> 
+									{{ nextData.desc != null ? nextData.desc+' &gt;&gt;' : '' }} 
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2 p-0"></div>
+	</div>
+</div>

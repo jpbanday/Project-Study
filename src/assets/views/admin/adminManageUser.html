@@ -1,0 +1,45 @@
+<div class="admin-bg">
+	<div class="admin-header d-flex align-items-center justify-content-space-between">
+		<span class="font-s24 semi-bold pointer" style="color: #C99D40;" ng-click="returnToList()">MANAGE USERS </span>
+		
+		<div class="">
+			<input style="padding: 10px 0px 10px 25px; background: #F0E6D2 0% 0% no-repeat padding-box;
+			border: 2px solid #C99D40; min-width: 317px; color: #B5AA84;" type="text" placeholder="Search">
+			<span class="input-search-span" style="padding-left: 5px;">
+				<i class="fa fa-search" style="color: #C99D40; padding-left: 5px; padding-top: 6px;"></i>
+			</span>
+		</div>
+	</div>
+
+	<div class="col-sm-12" style="padding: 30px 40px;">
+		<table class="col-sm-12 p-0">
+			<tr class="admin-table-header">
+				<th>Number</th>
+				<th>Name</th>
+				<th>Email Address</th>
+				<th>Status</th>
+				<th>Date Created</th>
+				<th></th>
+			</tr>
+			<tr class="admin-table-data" ng-show="data.length > 0"
+				ng-repeat="i in data | limitTo : maxView : (pageNumber-1)*maxView track by $index">
+				<td ng-click="viewDetails($index)">{{ i.ctr }}</td>
+				<td ng-click="viewDetails($index)">{{ i.name }}</td>
+				<td ng-click="viewDetails($index)">{{ i.username }}</td>
+				<td ng-click="viewDetails($index)">
+					<span ng-show="i.last_logged_in != null" style="color: #2CB230;">{{ 'Last Online ' + getDays.getDateDiffwAgo(i.last_logged_in) }}</span>
+				</td>
+				<td ng-click="viewDetails($index)">{{ i.date_created | date: 'yyyy.MM.dd' }}</td>
+				<td>
+					<img src="src/assets/img/Admin Page/Ic_Delete.png" class="pointer" ng-click="deleteUser($index)" style="height: 28px;">
+				</td>
+			</tr>
+			<tr class="admin-table-data" ng-show="data.length == 0"
+			style="margin: 0 0 10px 0; height: auto; width: 0; padding: 0;">
+				<td class="font-s14 text-center" colspan="6" style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+					No data to display.
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,101 @@
+<div class="admin-bg">
+	<div class="admin-header d-flex align-items-center justify-content-space-between">
+		<div>
+			<span class="font-s24 semi-bold pointer" style="color: #C99D40;" ng-click="returnToList()">MANAGE POSTS</span>
+			<span class="font-s24 semi-bold" style="color: #C99D40;"> {{ textDisplayToHeader }} </span>
+		</div>
+		
+		<div class="d-flex align-items-center">
+			<input  ng-show="dataView == 'list'" style="padding: 10px 0px 10px 25px; background: #F0E6D2 0% 0% no-repeat padding-box;
+			border: 2px solid #C99D40; min-width: 317px; color: #B5AA84;" type="text" placeholder="Search">
+			<span  ng-show="dataView == 'list'" class="input-search-span" style="padding-left: 5px;">
+				<i class="fa fa-search" style="color: #C99D40; padding-left: 5px; padding-top: 6px;"></i>
+			</span>
+		</div>
+	</div>
+
+	<div class="col-sm-12" style="padding: 30px 40px;">
+		<table class="col-sm-12 p-0" ng-show="dataView == 'list'">
+			<tr class="admin-table-header">
+				<th>Number</th>
+				<th>Title</th>
+				<th>Writer</th>
+				<th>Privacy</th>
+				<th>Replies</th>
+				<th>Date Created</th>
+				<th></th>
+			</tr>
+			<tr class="admin-table-data" ng-show="data.length > 0"
+				ng-repeat="i in data | limitTo : maxView : (pageNumber-1)*maxView track by $index">
+				<td ng-click="viewDetails($index)">{{ i.ctr }}</td>
+				<td ng-click="viewDetails($index)">{{ i.title }}</td>
+				<td ng-click="viewDetails($index)">{{ i.author }}</td>
+				<td ng-click="viewDetails($index)">
+					<span ng-if="i.isPrivate == 'false'" style="color: #7B87AA;">Public</span>
+					<span ng-if="i.isPrivate == 'true'" style="color: #C89B3C;">Private</span>
+				</td>
+				<td ng-click="viewDetails($index)">1</td>
+				<td ng-click="viewDetails($index)">{{ i.datePosted | date: 'yyyy.MM.dd' }}</td>
+				<td>
+					<img src="src/assets/img/Admin Page/Ic_Delete.png" class="pointer" ng-click="deleteReview($index)" style="height: 28px;">
+				</td>
+			</tr>
+			<tr class="admin-table-data" ng-show="data.length == 0"
+			style="margin: 0 0 10px 0; height: auto; width: 0; padding: 0;">
+				<td class="font-s14 text-center" colspan="7" style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+					No data to display.
+				</td>
+			</tr>
+		</table>
+
+		<div class="col-sm-12 p-0" ng-show="data.length > 0 && dataView == 'list'">
+			<ul class="pagination col-sm-12 p-0 d-flex justify-content-center align-items-center">
+				<li ng-click="prevPage()" ng-show="pageNumber > 5">
+					<a class="prev">
+						<i class="fa fa-chevron-left font-w400" aria-hidden="true"></i>
+					</a>
+				</li>
+				<li ng-repeat="page in pages | limitTo: 4 : pagePosition()" ng-click="setPage(page)">
+					<div>
+						<span ng-class="(pageNumber == page) ? 'admin-pagenum-span' : 'admin-unselected-page-num'"
+						style="cursor:pointer!important;">{{ page }}</span>
+					</div>
+				
+				</li>
+				<li ng-click="nextPage()" ng-show="pages.length > 5">
+					<a class="next">
+						<i class="fa fa-chevron-right font-w400" aria-hidden="true"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- DETAIL VIEW -->
+		<div ng-show="dataView == 'details'" class="create d-flex justify-content-space-between align-items-center" style="padding: 10px 20px; margin-bottom: 10px;">
+			<span class="font-s22 semi-bold" style="color: #C99D40;">
+				{{ selectedDetails.ctr | number }} 
+				<span class="font-s16 semi-bold" style="color: #755F36;">
+					{{ selectedDetails.title }}
+				</span> 
+			</span>
+
+			<span class="font-s14" style="color: #B5AA84;"> {{ selectedDetails.author }} | {{ selectedDetails.datePosted | date: 'yyyy.MM.dd' }} </span>
+		</div>
+		<div class="col-sm-12" ng-show="dataView == 'details'" style="padding: 25px; border: 2px solid #B5AA84; background-color: #EBDEC4;">
+			<span class="font-s14 semi-bold" style="height: 105px; color: #755F36;">{{ selectedDetails.review }} </span>
+			<span class="col-sm-12" style="padding: 20px 0; border-bottom: 2px solid #B5AA84;"></span>
+			<span class="col-sm-12 font-s16 semi-bold" style="padding: 10px 0 0; color: #C99D40;">Replies (1)</span>
+			<span class="col-sm-12 font-s16" style="padding: 10px 0 0; color: #7B87AA;">
+				Noobmaster68+1
+				<span class="font-s14" style="color: #B5AA84;">5:32PM 2021.12.30</span>
+			</span>
+			<span class="col-sm-12 font-s14 semi-bold" style="padding: 10px 0 0; color: #755F36;">Thanks for letting us know!</span>
+		</div>
+
+		<div ng-show="dataView == 'details'" class="col-sm-12 p-0 d-flex" style="margin-top: 15px; align-items: flex-end;">
+			<input type="text" class="input col-sm-10" placeholder="Write a reply..." style="color: #B5AA84; background: #F0E6D2 0% 0% no-repeat padding-box; border: 2px solid #C99D40;">
+			<button class="input col-sm-2 pr-0" style="height: 2.9vw; color: white; border: 0; background: #C99D40 0% 0% no-repeat padding-box; margin-left: 10px;">REPLY</button>
+		</div>
+		<!-- <textarea ng-show="dataView == 'details'" class="admin-input font-s14 col-sm-12" rows="10" disabled> {{ selectedDetails.review }} </textarea> -->
+	</div>
+</div>

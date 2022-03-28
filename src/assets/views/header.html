@@ -1,0 +1,56 @@
+<div>
+	<div class="col-sm-12 header p-0" style="height: 6.3vw;">
+		<div class="col-sm-2 p-0"></div>
+		<div class="col-sm-8 p-0">
+			<div class="col-sm-12 p-0" style="display: inline-flex;">
+				<div class="pointer" style="padding: 20px 0px !important" ui-sref="main"><img src="src/assets/img/Logo-Header.png" style="height: 55px;"></div>
+				<!-- <div class="p-32-14 header-hover" ui-sref="main" ui-sref-active="header-active" style=" margin-left: 8vw;">
+					<span class="text-brown semi-bold font-s18">HOME</span>
+				</div> -->
+				<div class="d-flex flex-direction-row align-items-center">
+					<div class="p-37-14 header-hover" ui-sref="team" ui-sref-active="header-active" style=" margin-left: 8vw;">
+						<span class="text-brown semi-bold font-s16">TEAM</span>
+					</div>
+					<div class="p-37-14 header-hover" ui-sref="notice" ui-sref-active="header-active">
+						<span class="text-brown semi-bold font-s16">NOTICE</span>
+					</div>
+					<div class="p-37-14 header-hover dropdown" ui-sref="priceguide" ui-sref-active="header-active">
+						<span class="text-brown semi-bold font-s16">PRICE GUIDE</span>
+						<!-- <i class="fa fa-angle-down text-brown font-s20 pl-5"></i>
+						<div class="dropdown-content">
+							<a href="#">LoL Cultivation Price</a>
+							<a href="#">LoL Farming Packages</a>
+							<a href="#">Placement Test</a>
+							<a href="#">Seongdang System</a>
+							<a href="#">Duo Rank</a>
+							<a href="#">One-on-One</a>
+						</div> -->
+					</div>
+					<div class="p-37-14 header-hover" ui-sref="workstatus" ui-sref-active="header-active">
+						<span class="text-brown semi-bold font-s16">WORK STATUS</span>
+					</div>
+					<div class="p-37-14 header-hover" ui-sref="reviews" ui-sref-active="header-active">
+						<span class="text-brown semi-bold font-s16">REVIEWS</span>
+					</div>
+					<div class="p-37-14 header-hover" ui-sref="service" ui-sref-active="header-active">
+						<span class="text-brown semi-bold font-s16">SERVICE</span>
+					</div>
+					<div class="" ng-if="!isLoggedIn" ui-sref="login" ui-sref-active="header-active" style="margin-left: 22px;">
+						<button class="btn-linear semi-bold">
+							LOGIN/SIGNUP
+						</button>
+					</div>
+					<div class="header-hover d-flex flex-direction-row align-items-center" ng-if="isLoggedIn" ui-sref="login" ui-sref-active="header-active" style="padding: 23px 10px;">
+						<img class="object-cover rounded-image" src="https://921435.smushcdn.com/2306015/wp-content/uploads/2021/07/tanjiro-mark-fi-1-768x431.jpg?lossy=1&strip=1&webp=1">
+						<div class=" d-flex flex-direction-column pl-10">
+							<span class="text-white font-s12" style="opacity: 50%;">Welcome!</span>
+							<span class="text-white font-s16">{{ userinfo.name }}</span>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2 p-0"></div>
+	</div>
+</div>

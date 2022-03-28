@@ -1,0 +1,76 @@
+<div class="top-page p-0" style="height: auto;">
+	<img src="src/assets/img/Login Signup/Login-Signup BG.jpg" class="col-sm-12 p-0">
+	<div class="col-sm-12" style="position: absolute; transform: translateY(8vw);">
+		<div class="col-sm-2 p-0"></div>
+		<div class="col-sm-8 p-0 d-flex justify-content-center align-items-center flex-direction-column">
+			<div class="login-container d-flex justify-content-center align-items-center flex-direction-column" ng-init="con='login'">
+				<img src="src/assets/img/Login Signup/Login-Signup-Logo.png" width="123.93px" height="86.6px">
+
+				<div ng-show="con == 'login'"> 
+					<form name="loginFrm">
+						<span class="font-s24 col-sm-12 text-center semi-bold pt-10 pb-30" style="color: #FFFFFF;"> LOGIN </span>
+						<span class="col-sm-12 p-0 font-s16 text-left semi-bold" style="color: #928D80; margin-bottom: 5px;">Username or Email</span>
+						<input type="text" class="col-sm-12 input" tabindex="1" ng-model="loginDetails.username" required>
+						<span class="col-sm-12 p-0 font-s16 text-left semi-bold" style="color: #928D80; margin-bottom: 5px;">Password</span>
+						<input type="password" class="col-sm-12 input" tabindex="2" ng-model="loginDetails.password" required>
+
+						<div class=" col-sm-12 p-0 d-flex justify-content-space-between">
+							<div class="d-flex justify-content-space-between">
+								<label class="col-sm-12 p-0 font-s16 text-left semi-bold" style="color: #928D80;" style="word-wrap:break-word">
+									<input type="checkbox" style="appearance: none;
+									border: 2px solid #785A28; height: 27px; width: 27px;" tabindex="4"/> Remember Me
+								</label>
+							</div>
+							<button  type="submit" class="btn" tabindex="3" ng-click="login()">LOG IN</button>
+						</div>
+					</form>
+					
+					<div class="d-flex flex-direction-column col-sm-12 " style="padding: 15px 0 0; align-items: flex-end;">
+						<span class="text-right font-s12" style="color: #FFFFFF;"> Don't have an account yet? </span>
+						<button class="text-right font-s16 pointer" tabindex="4" ng-click="con = 'signup'"
+						style="color: #7B87AA; border: 0; background: transparent; width: 5vw;"> 
+							SIGN UP
+						</button>
+					</div>
+				</div>
+				<div ng-show="con == 'signup'">
+					<span class="font-s24 col-sm-12 text-center semi-bold pt-10 pb-30" style="color: #FFFFFF;"> Register </span>
+
+					<form name="signupFrm">
+						<span class="col-sm-12 p-0 font-s16 text-left semi-bold" style="color: #928D80; margin-bottom: 5px;">Name</span>
+						<input type="text" class="col-sm-12 input" tabindex="1" ng-model="signupDetails.name" required>
+
+						<span class="col-sm-12 p-0 font-s16 text-left semi-bold" style="color: #928D80; margin-bottom: 5px;">Username or Email</span>
+						<input type="text" class="col-sm-12 input" tabindex="2" ng-model="signupDetails.username" required>
+
+						<span class="col-sm-12 p-0 font-s16 text-left semi-bold" style="color: #928D80; margin-bottom: 5px;">Password</span>
+						<input type="password" class="col-sm-12 input" tabindex="3" ng-model="signupDetails.password" required>
+
+						<span class="col-sm-12 p-0 font-s16 text-left semi-bold" style="color: #928D80; margin-bottom: 5px;">Re-enter Password</span>
+						<input type="password" class="col-sm-12 input" tabindex="4" ng-model="signupDetails.reenterpw" required>
+
+						<div class=" col-sm-12 p-0 d-flex justify-content-space-between">
+							<div class="d-flex justify-content-space-between">
+								<label class="col-sm-12 p-0 font-s16 text-left semi-bold" style="color: #928D80;" style="word-wrap:break-word">
+									<input type="checkbox" style="appearance: none;
+									border: 2px solid #785A28; height: 27px; width: 27px;" tabindex="4"/> Remember Me
+								</label>
+							</div>
+							<button class="btn" tabindex="5" ng-click="signup()">SIGN UP</button>
+						</div>
+					</form>
+					
+					
+					<div class="d-flex flex-direction-column col-sm-12 " style="padding: 15px 0 0; align-items: flex-end;">
+						<span class="text-right font-s12" style="color: #FFFFFF;"> Already have an account? </span>
+						<button class="text-right font-s16 pointer" tabindex="6" ng-click="con = 'login'"
+						style="color: #7B87AA; border: 0; background: transparent; width: 5vw;"> 
+							LOGIN
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2 p-0"></div>
+	</div>
+</div>

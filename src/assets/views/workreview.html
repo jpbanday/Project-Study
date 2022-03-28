@@ -1,0 +1,193 @@
+<div class="col-sm-12 top-page" style="height: auto;">
+	<div style="background-image: url('src/assets/img/Work Review/Work review-bg.jpg'); height: inherit; background-repeat: no-repeat; height: 11vw;">
+		<div class="col-sm-2 p-0"></div>
+		<div class="col-sm-8 p-0">
+			<div class="col-sm-12" style="padding: 2vw 0 0;">
+				<span class="col-sm-12 semi-bold pl-0 font-s22" style="color: #A19C8B;">REVIEWS FROM OUR VALUED CUSTOMERS</span>
+				<span class="col-sm-12 semi-bold pl-0 font-s40 semi-bold" style="color: #F1E7D2;">WORK REVIEWS</span>
+			</div>
+			<div class="col-sm-12 p-0" style="transform: translateY(5vw);">
+				<div ng-show="!isShowData && !isWriteReview">
+					<div class="d-flex justify-content-space-between align-items-center pb-10">
+						<span class="font-s16" style="color: #F4EAD5;">All 321</span>
+						<div class="d-flex align-items-center">
+							<select id="sort">
+								<option value="lastestOrder">Latest Order</option>
+							</select>
+							<button class="btn" style="margin-left: 15px; height: 45px; padding: 10px 35px;" ng-click="writeReview()">WRITE A REVIEW</button>
+						</div>
+					</div>
+					<div class="col-sm-12 p-15-0">
+						<table class="col-sm-12 p-0 data-hover">
+							<tr>
+								<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+									Number
+								</th>
+								<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+									Title
+								</th>
+								<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+									Writer
+								</th>
+								<th class="font-s14" style="color: #CEBE91;  padding: 0 5px">
+									Date Created
+								</th>
+							</tr>
+							<tr class="notice-container" ng-repeat="i in data | limitTo : maxView : (pageNumber-1)*maxView track by $index" 
+							style="margin: 0 0 10px 0; height: auto; width: 0; padding: 0; border: 2px solid #302F35;" ng-click="viewData(i.ctr, $index)">
+								<td class="font-s18" style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+									{{ i.ctr | number }}
+								</td>
+								<td style="color: #F1E7D2; margin: 0 0 10px 0; padding: 5px 10px">
+									{{ i.title }}
+								</td>
+								<td style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+									{{ i.author }}
+								</td>
+								<td style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+									{{ i.datePosted | date: "yyyy.MM.dd" }}
+								</td>
+							</tr>
+							<tr class="notice-container" ng-show="data.length == 0"
+							style="margin: 0 0 10px 0; height: auto; width: 0; padding: 0; border: 2px solid #302F35;">
+								<td class="font-s16 text-center" colspan="4" style="color: #A19C8B; margin: 0 0 10px 0; padding: 5px 10px">
+									No data to display.
+								</td>
+							</tr>
+						</table>
+						<div class="col-sm-12 p-0" ng-show="data.length > 0">
+							<ul class="pagination col-sm-12 p-0 d-flex justify-content-flex-end align-items-center">
+								<li ng-click="prevPage()" ng-show="pageNumber > 5">
+									<a class="prev">
+										<i class="fa fa-chevron-left font-w400" aria-hidden="true"></i>
+									</a>
+								</li>
+								<li ng-repeat="page in pages | limitTo: 4 : pagePosition()" ng-click="setPage(page)">
+									<div>
+										<span ng-class="(pageNumber == page) ? 'pagenum-span' : 'unselected-page-num'"
+										style="cursor:pointer!important;">{{ page }}</span>
+									</div>
+								
+								</li>
+								<li ng-click="nextPage()" ng-show="pages.length > 5">
+									<a class="next">
+										<i class="fa fa-chevron-right font-w400" aria-hidden="true"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div ng-show="isShowData && !isWriteReview" class="col-sm-12 p-0">
+					<span class="pb-30 semi-bold pointer" style="color: #F4EAD5;" ng-click="backToList()"> &lt;&lt; Back to List View</span>
+					<div class="col-sm-12" style="padding: 30px 0 0; height: 38vw;">
+						<div class="col-sm-12" style="background: #010A13 0% 0% no-repeat padding-box; border: 2px solid #463714; margin: 0 20px; width: 63.3vw;">
+							<div class="col-sm-12 d-flex" style="min-height: 36vw; align-items: flex-end; padding: 0 10px 5px 10px;">
+								<input type="text" class="input col-sm-9" placeholder="Write a reply...">
+								<button class="input col-sm-3 pr-0" style="color: #BA9D65; min-width: 10vw; margin-left: 10px;">REPLY</button>
+							</div>
+						</div>
+						<div class="col-sm-12 p-15" style="background: #010A13 0% 0% no-repeat padding-box; border: 2px solid #463714; transform: translateY(-35vw);">
+							<div class="col-sm-12 p-0 d-flex flex-direction-column">
+								<span class="font-s16 semi-bold" style="color: #B5AA84;"> {{ selectedData.ctr }} </span>
+								<span class="font-s18 semi-bold" style="color: #C8AA6E;"> {{ selectedData.title }} </span>
+								<span class="font-s16" style="color: #B5AA84;"> 
+									{{ selectedData.author }} | {{ selectedData.datePosted | date: "yyyy.MM.dd" }}
+								</span>
+							</div>
+							<div class="col-sm-12" style="border-top: 2px solid #463714; margin: 20px 0;"></div>
+							<div style="min-height: 18vw;">
+								<span class="font-s16 semi-bold" style="color: #D1C6A8; "> {{ selectedData.review }} </span>
+							</div>
+							<div class="col-sm-12">
+								<div class="col-sm-12 p-0 d-flex justify-content-space-between">
+									<span class="font-s16 semi-bold pointer" style="color: #C99D40;" ng-click="nextShowData('prev')"> 
+										 {{ prevData.title != null ? '&lt;&lt; ' + prevData.title : '' }}
+									</span>
+									<span class="font-s16 semi-bold pointer" style="color: #C99D40;" ng-click="nextShowData('next')"> 
+										{{ nextData.title != null ? nextData.title+' &gt;&gt;' : '' }} 
+									</span>
+								</div>
+								<div class="col-sm-12 p-0 d-flex flex-direction-column" style="border-top: 2px solid #463714; margin-top: 10px;">
+									<span class="font-s16 pb-10 pt-10" style="color: #F8F4EE;">Replies (1)</span>
+									<div class="d-flex justify-content-space-between align-items-center pb-5">
+										<span class="font-s16" style="color: #C99D40;">Noobmaster68+1</span>
+										<span class="font-s14" style="color: #D1C6A8;">5:32PM 2021.12.30</span>
+									</div>
+									<span class="font-s16 pb-10" style="color: #D1C6A8">Thanks for letting us know!</span>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div ng-show="isWriteReview" class="col-sm-12 p-0">
+					<div class="d-flex justify-content-space-between align-items-center pb-10">
+						<span class="semi-bold pointer" style="color: #F4EAD5;" ng-click="backToList('fromreview')"> &lt;&lt; Back to List View</span>
+						<button class="btn" style="margin-left: 15px; height: 45px; padding: 10px 35px;" ng-click="writeReview('publish')">PUBLISH REVIEW</button>
+					</div>
+
+					<form name="reviewFrm" autocomplete="off">
+						<div class="review-container col-sm-12 d-flex flex-direction-row">
+							<div class="d-flex flex-direction-column col-sm-6">
+								<span class="font-s16 semi-bold pb-10" style="color: #F1E7D2;">Title</span>
+								<input type="text" class="input pb-10" ng-model="postReview.title" required>
+								<div class="d-flex align-items-center">
+									<div class="d-flex flex-direction-column col-sm-9 pl-0">
+										<span class="font-s16 semi-bold pb-10" style="color: #F1E7D2;">Author</span>
+										<input type="text" autocomplete="nope" class="input pb-10" ng-model="postReview.author" required>
+									</div>
+									<div class="d-flex flex-direction-column col-sm-3 pr-0">
+										<span class="font-s16 semi-bold pb-10" style="color: #F1E7D2;">Private</span>
+										<!-- <input type="text" class="input pb-10"> -->
+										<label class="switch" style="margin-bottom: 11px;">
+											<input type="checkbox" ng-model="postReview.isPrivate">
+											<span class="slider d-flex align-items-center">
+												<span class="col-sm-12 text-center" style="color: #785A28; padding-left: 30px;" ng-show="!postReview.isPrivate">ON</span>
+												<span class="col-sm-12 text-center" style="color: #34485D; padding-right: 35px;" ng-show="postReview.isPrivate">OFF</span>
+											</span>
+										</label>
+									</div>
+								</div>
+								<span class="font-s16 semi-bold pb-10" autocomplete="off" style="color: #F1E7D2;">Password</span>
+								<input type="password" class="input pb-10" ng-model="postReview.password" required>
+	
+								<span class="font-s16 semi-bold pb-10" style="color: #F1E7D2;">Search</span>
+								<select id="sort" style="width: auto; border: 2px solid #785A28; background-color: #000407;">
+									<option value="Allow search by title only (Private)">Allow search by title only (Private)</option>
+								</select>
+							</div>
+							<div class="d-flex flex-direction-column col-sm-6">
+								<span class="font-s16 semi-bold pb-10" style="color: #F1E7D2;">Review</span>
+								<textarea type="text" class="input" ng-model="postReview.review" placeholder="Write your review..." rows="14" required></textarea>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="note-container note col-sm-12 p-0">
+					<ul>
+						<li>
+							Hello, This is a review of the work of GG Penta Team, a company specializing in LoL cultivation. These are reviews from customers about the work they did after using our GG Penta. 
+						</li>
+						<li>
+							We would appreciate it if you could leave a variety of reviews, such as whether you were satisfied or dissatisfied with the process.
+						</li>
+						<li>Your reviews can be important feedback for us. <br/>
+							If there is a part you are not satisfied with, we will try to improve it.<br/>
+							If you are satisfied with the progress of the work, we will try our best to make you more satisfied with that part. 
+						</li>
+						<li>And customers who used GG Penta and 
+							left a review, please tell us that you have left a review the next time you use it! If confirmed, we will give you a little more discount!! In the future, we are planning a best review event. When it is ready, I will post it separately in the notice. 
+						</li>
+						<li>
+							Occasionally, some people leave only two or three meaningless consonants such as 'heh' or 'heh' in the reviews, but I would really appreciate it if you could write a little more like a review. Please check this for the full history check. You can quickly check the history and progress of your account. 
+						</li>
+						<li>When the work is completed, please leave a small review on our work review page, thank you very much!</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2 p-0"></div>
+	</div>
+</div>

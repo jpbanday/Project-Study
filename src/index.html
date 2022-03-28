@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html class="no-focus" data-ng-app="app" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>GG Penta</title>
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" id="css-custom" href="src/assets/css/style.css">
+
+	<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-storage.js"></script>
+</head>
+<body data-ng-controller="appCtrl">
+	<script src="src/assets/js/core/angular.min.js"></script>
+	<script src="src/assets/js/core/angular-ui-router.min.js"></script>
+
+	<header id="header-navbar" data-ui-view="header"></header>
+	<main id="main-container" data-ui-view="main"></main>
+	<footer id="page-footer" data-ui-view="footer"></footer>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+	<script src="src/assets/js/core/angular-ui-router.min.js"></script>
+
+	<!-- CONTROLLERS -->
+	<script src="src/assets/app.js"></script>
+	<script src="src/assets/js/controllers/AppCtrl.js"></script>
+	<script src="src/assets/js/controllers/homeCtrl.js"></script>
+	<script src="src/assets/js/controllers/noticeCtrl.js"></script>
+	<script src="src/assets/js/controllers/workStatusCtrl.js"></script>
+	<script src="src/assets/js/controllers/workReviewCtrl.js"></script>
+	<script src="src/assets/js/controllers/admin/workStatusCtrl.js"></script>
+	<script src="src/assets/js/controllers/admin/ManageUserCtrl.js"></script>
+	<script src="src/assets/js/controllers/admin/ManagePostCtrl.js"></script>
+
+	<!-- FACTORY -->
+	<script src="src/assets/js/factory/HomeFactory.js"></script>
+	<script src="src/assets/js/factory/workReviewFactory.js"></script>
+	<script src="src/assets/js/factory/AdminFactory.js"></script>
+
+	<script src="src/assets/js/service/dateFactory.js"></script>
+</body>
+</html>
