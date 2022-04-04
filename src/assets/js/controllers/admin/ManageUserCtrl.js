@@ -30,7 +30,7 @@ App.controller('AdmManageUserCtrl', function($scope, $rootScope, $state, ManageU
 	$scope.getUsers();
 
 	$scope.deleteUser = (ind) => {
-		ManageUserFactory.deleteUser({ uid: $scope.data[ind].uid}).then((res) => {
+		ManageUserFactory.deleteUser({ uid: $scope.data[ind].id}).then((res) => {
 			console.log('res', res)
 			if(res.data.success) {
 				$scope.getUsers();

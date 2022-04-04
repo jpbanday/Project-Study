@@ -31,7 +31,7 @@
 				<td ng-click="viewDetails($index)">{{ i.title }}</td>
 				<td ng-click="viewDetails($index)">{{ i.author }}</td>
 				<td ng-click="viewDetails($index)">
-					<span ng-if="i.isPrivate == 'false'" style="color: #7B87AA;">Public</span>
+					<span ng-if="i.isPrivate == 'false' || i.isPrivate == null" style="color: #7B87AA;">Public</span>
 					<span ng-if="i.isPrivate == 'true'" style="color: #C89B3C;">Private</span>
 				</td>
 				<td ng-click="viewDetails($index)">1</td>

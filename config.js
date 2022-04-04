@@ -1,11 +1,27 @@
 const admin = require('firebase-admin');
+const auth = require('firebase/auth');
 var serviceAccount = require('./admin.json');
+var async = require('async');
 
 admin.initializeApp({
 	credential: admin.credential.cert(serviceAccount),
 	databaseURL: "https://actualproject-ea38f-default-rtdb.asia-southeast1.firebasedatabase.app", //"https://projectstudy-77825-default-rtdb.asia-southeast1.firebasedatabase.app",
 	authDomain: "actualproject-ea38f.firebaseapp.com",
 });
+
+// const db = admin.firestore();
+// async function insertData(collection, doc, obj) {
+// 	const usersDb = db.collection(collection); 
+// 	const liam = usersDb.doc(obj.uid); 
+// 	await liam.set({
+// 		first: 'Liam',
+// 		last: 'Ragozzine',
+// 		address: '133 5th St., San Francisco, CA',
+// 		birthday: '05/13/1990',
+// 		age: '30'
+// 	});
+// }
+
 
 function db(tbl) {
 	var db =  admin.database();

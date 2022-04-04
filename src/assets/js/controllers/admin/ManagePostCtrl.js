@@ -44,7 +44,7 @@ App.controller('ManagePostCtrl', function($scope, $rootScope, $state, ManagePost
 	}
 
 	$scope.deleteReview = (ind) => {
-		ManagePostFactory.deleteReview({ uid: $scope.data[ind].uid }).then((res) => {
+		ManagePostFactory.deleteReview({ uid: $scope.data[ind].id }).then((res) => {
 			console.log('res', res)
 			if(res.data.success) {
 				$scope.getList();

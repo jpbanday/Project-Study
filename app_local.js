@@ -32,23 +32,23 @@ app.post("/api/signupUser", appService.signup);
 // LOGIN
 app.post("/api/loginUser", appService.login);
 // ADMIN LOGIN
-// app.post("/api/adminLogin", appService.adminLogin);
+app.post("/api/adminLogin", appService.adminLogin);
 
 //Review
-// app.post('/api/review/postReview', review.saveReviews);
-// app.get('/api/review/getReviewList', review.getReviewList);
-// app.get('/api/review/getAllListReview', review.getAllListReview);
-// app.post('/api/review/deleteReview', review.deleteReview);
+app.post('/api/review/postReview', review.saveReviews);
+app.get('/api/review/getReviewList', review.getReviewList);
+app.get('/api/review/getAllListReview', review.getAllListReview);
+app.post('/api/review/deleteReview', review.deleteReview);
 
 //Work Status
-// app.post('/api/workstatus/saveWorkStatus', workStatus.saveWorkStatus);
-// app.get('/api/workstatus/getWorkStatus', workStatus.getWorkStatus);
-// app.post('/api/workstatus/deleteWorkStatus', workStatus.deleteWorkStatus);
-// app.post('/api/workstatus/updateWorkStatus', workStatus.updateWorkStatus);
+app.post('/api/workstatus/saveWorkStatus', workStatus.saveWorkStatus);
+app.get('/api/workstatus/getWorkStatus', workStatus.getWorkStatus);
+app.post('/api/workstatus/deleteWorkStatus', workStatus.deleteWorkStatus);
+app.post('/api/workstatus/updateWorkStatus', workStatus.updateWorkStatus);
 
 // User 
-// app.get('/api/user/getUsers', user.getUsers);
-// app.post('/api/user/deleteUser', user.deleteUser);
+app.get('/api/user/getUsers', user.getUsers);
+app.post('/api/user/deleteUser', user.deleteUser);
 
 // app.post("/api/savedata", async function(req, res) {
 //     var data = await appService.getSample(req, res);

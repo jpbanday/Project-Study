@@ -7,7 +7,7 @@ App.controller('AdmWorkStatusCtrl', function($scope, $rootScope, $state, WorkSta
 	$scope.pageNumber = 1;
 	$scope.pages = [];
 
-	$scope.$watch('', function() {lo
+	$scope.$watch('', function() {
 		if($rootScope.adminInfo == null || $rootScope.adminInfo.username == null) {
 			return $state.go('admin-login')
 		} 
@@ -53,7 +53,7 @@ App.controller('AdmWorkStatusCtrl', function($scope, $rootScope, $state, WorkSta
 		if(isValid) {
 			$scope.details['status'] = status
 			if($scope.textDisplayToHeader == " > EDIT STATUS") {
-				WorkStatusFactory.updateWorkStatus({ details: $scope.details, uid: $scope.uid }).then((res) => {
+				WorkStatusFactory.updateWorkStatus({ details: $scope.details }).then((res) => {
 					if(res.data.success){
 						$scope.dataView = 'success';
 						$scope.getWorkStatus();
@@ -94,7 +94,7 @@ App.controller('AdmWorkStatusCtrl', function($scope, $rootScope, $state, WorkSta
 
 	$scope.removeData = (ind) => {
 		$scope.toDeleteData = $scope.data[ind];
-		WorkStatusFactory.deleteWorkStatus({ uid: $scope.data[ind].uid }).then((res) => {
+		WorkStatusFactory.deleteWorkStatus({ uid: $scope.data[ind].id }).then((res) => {
 			if(res.data.success) {
 				$scope.getWorkStatus();
 			}
