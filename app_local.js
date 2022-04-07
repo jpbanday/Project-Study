@@ -8,6 +8,7 @@ var https = require('https'); // use this if 443
 var http = require('http');  // use this if not 443
 var path = require('path');
 var async = require('async');
+var fs = require('fs');
 var port = process.env.PORT || 8080;
 var _ = require('lodash');
 //var config = require('./config');
@@ -18,14 +19,51 @@ var review = require('./controllers/services/workReviewService')
 var workStatus = require('./controllers/services/workStatusService')
 var user = require('./controllers/services/userService')
 
+// app.use(vhost('localhost', front));
+// app.use(vhost('backend.localhost', backend));
+
 app.use(express.static("./"));
 app.use(express.json()) // for header - parsing application/json
 app.use(express.urlencoded({ extended: true })) // for header - parsing application/x-www-form-urlencoded
+
+//SSL
+const options = {
+    key: fs.readFileSync('./auth/private.key'),
+    cert: fs.readFileSync('./auth/certificate.crt'),
+    ca: fs.readFileSync('./auth/ca_bundle.crt'),
+    minVersion: "TLSv1.2"
+};
+
+https.createServer(options, (req, res) => {
+    res.writeHead(200);
+    res.end('hello SecureSign\n');
+}).listen(8000);
+
+var port = 443
+//use http if not 443, https if 443
+var server = https.createServer(options, app);
+// END OF SSL
+
+
 
 // API
 app.get("/", function(req, res) {
     res.sendFile("./src/index.html", { root: __dirname });
 });
+
+
+//// BACKEND API's
+// backend.use(compression());
+// backend.use(express.urlencoded({ extended: true }));
+// backend.use(express.json());
+// backend.all("/api/*", function (req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Authorization, Content-Type, X-Requested-With, X-User-Password");
+//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT");
+//     res.header('Access-Control-Allow-Credentials', true);
+//     return next();
+// });
+
 
 //SIGNUP
 app.post("/api/signupUser", appService.signup);
@@ -63,6 +101,15 @@ front.get('/', function (req, res, next) {
 //     }
 // });
 
-app.listen(port, function() {
+server.listen(port, function() {
     console.log('Server listening on port: '+ port);
 })
+
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80); //80
+
+process.on('uncaughtException', function (err) {
+    console.log('uncaughtException : ' + err);
+});
