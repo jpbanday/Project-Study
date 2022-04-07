@@ -50,6 +50,10 @@ app.post('/api/workstatus/updateWorkStatus', workStatus.updateWorkStatus);
 app.get('/api/user/getUsers', user.getUsers);
 app.post('/api/user/deleteUser', user.deleteUser);
 
+front.get('/', function (req, res, next) {
+    res.status(200).sendFile('index.html', { root: path.join(__dirname, 'src') });
+});
+
 // app.post("/api/savedata", async function(req, res) {
 //     var data = await appService.getSample(req, res);
 //     if(!(_.size(data))) {
