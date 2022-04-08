@@ -4,9 +4,9 @@ var serviceAccount = require('./admin.json');
 var async = require('async');
 
 admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount),
-	databaseURL: "https://actualproject-ea38f-default-rtdb.asia-southeast1.firebasedatabase.app", //"https://projectstudy-77825-default-rtdb.asia-southeast1.firebasedatabase.app",
-	authDomain: "actualproject-ea38f.firebaseapp.com",
+	// credential: admin.credential.cert(serviceAccount),
+	// databaseURL: "https://actualproject-ea38f-default-rtdb.asia-southeast1.firebasedatabase.app", //"https://projectstudy-77825-default-rtdb.asia-southeast1.firebasedatabase.app",
+	// authDomain: "actualproject-ea38f.firebaseapp.com",
 });
 
 // const db = admin.firestore();

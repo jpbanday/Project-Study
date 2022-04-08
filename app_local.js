@@ -1,6 +1,7 @@
 var express = require('express');
 var compression = require('compression');
 var app = express();
+require('dotenv').config();
 var vhost = require('vhost');
 var front = express(); //for front
 var backend = express(); //for back
@@ -12,7 +13,7 @@ var fs = require('fs');
 var port = process.env.PORT || 8080;
 var _ = require('lodash');
 //var config = require('./config');
-var config2 = require('./config2')
+//var config2 = require('./config2')
 // SERVICES
 var appService = require('./controllers/services/appService')
 var review = require('./controllers/services/workReviewService')
@@ -22,6 +23,7 @@ var user = require('./controllers/services/userService')
 // app.use(vhost('localhost', front));
 // app.use(vhost('backend.localhost', backend));
 
+console.log(process.env)
 app.use(express.static("./"));
 app.use(express.json()) // for header - parsing application/json
 app.use(express.urlencoded({ extended: true })) // for header - parsing application/x-www-form-urlencoded
