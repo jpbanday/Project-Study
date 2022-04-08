@@ -4,6 +4,7 @@ const fs = require('firebase/firestore');
 var async = require('async');
 // var serviceAccount = require('./admin.json');
 const admin = require("firebase-admin")
+const secret = require('./secret')
 
 // let serviceAccount = {
 // 	type : process.env.type,
@@ -19,14 +20,14 @@ const admin = require("firebase-admin")
 // }
 
 const firebaseConfig = {
-	apiKey: process.env.apiKey,
-	authDomain: process.env.authDomain,
-	databaseURL: process.env.databaseURL,
-	projectId: process.env.projectId,
-	storageBucket: process.env.storageBucket,
-	messagingSenderId: process.env.messagingSenderId,
-	appId: process.env.appId,
-	measurementId: process.env.measurementId,
+	apiKey: secret.fbConfig.apiKey,
+	authDomain: secret.fbConfig.authDomain,
+	databaseURL: secret.fbConfig.databaseURL,
+	projectId: secret.fbConfig.projectId,
+	storageBucket: secret.fbConfig.storageBucket,
+	messagingSenderId: secret.fbConfig.messagingSenderId,
+	appId: secret.fbConfig.appId,
+	measurementId: secret.fbConfig.measurementId,
 	//credentials: fs.cert(serviceAccount)
 };
 

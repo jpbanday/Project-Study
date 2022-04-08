@@ -23,7 +23,6 @@ var user = require('./controllers/services/userService')
 // app.use(vhost('localhost', front));
 // app.use(vhost('backend.localhost', backend));
 
-console.log(process.env)
 app.use(express.static("./"));
 app.use(express.json()) // for header - parsing application/json
 app.use(express.urlencoded({ extended: true })) // for header - parsing application/x-www-form-urlencoded
