@@ -5,15 +5,28 @@ var async = require('async');
 var serviceAccount = require('./admin.json');
 const admin = require("firebase-admin")
 
+// let serviceAccount = {
+// 	type : process.env.type,
+// 	project_id : process.env.project_id,
+// 	private_key_id : process.env.private_key_id,
+// 	private_key : process.env.private_key,
+// 	client_email : process.env.client_email,
+// 	client_id : process.env.client_id,
+// 	auth_uri : process.env.auth_uri,
+// 	token_uri : process.env.token_uri,
+// 	auth_provider_x509_cert_url : process.env.auth_provider_x509_cert_url,
+// 	client_x509_cert_url : process.env.client_x509_cert_url
+// }
+
 const firebaseConfig = {
-	apiKey: "AIzaSyDW77h9ekpzn_KdBst8M8G2mRgT9Nb0z4M",
-	authDomain: "actualproject-ea38f.firebaseapp.com",
-	databaseURL: "https://actualproject-ea38f-default-rtdb.asia-southeast1.firebasedatabase.app",
-	projectId: "actualproject-ea38f",
-	storageBucket: "actualproject-ea38f.appspot.com",
-	messagingSenderId: "886053792463",
-	appId: "1:886053792463:web:030b8456cfbed1d59625ba",
-	measurementId: "G-5PV00PPFGK",
+	apiKey: process.env.apiKey,
+	authDomain: process.env.authDomain,
+	databaseURL: process.env.databaseURL,
+	projectId: process.env.projectId,
+	storageBucket: process.env.storageBucket,
+	messagingSenderId: process.env.messagingSenderId,
+	appId: process.env.appId,
+	measurementId: process.env.measurementId,
 	//credentials: fs.cert(serviceAccount)
 };
 
